@@ -37,6 +37,7 @@ app.get('/selection', function(req, res){
 				var user_info = body;
 				request({json: true, url:'https://graph.facebook.com/me/accounts', qs:{'access_token':req.query.token}}, function(error, response, body){
 					if(!error && response.statusCode == 200){
+						res.send('this is a thing.');
 						res.render('pages', {
 							name: user_info.first_name,
 							accessToken: req.query.token,
