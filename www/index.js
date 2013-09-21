@@ -37,8 +37,8 @@ app.get('/selection', function(req, res){
 				var user_info = body;
 				request({json: true, url:'https://graph.facebook.com/me/accounts', qs:{'access_token':req.query.token}}, function(error, response, body){
 					if(!error && response.statusCode == 200){
-						res.send('this is a thing.');
-						res.render('pages', {
+						//res.send('this is a thing.');
+						res.render(__dirname + '/views/pages.tmpl', {
 							name: user_info.first_name,
 							accessToken: req.query.token,
 							pages: body.data
