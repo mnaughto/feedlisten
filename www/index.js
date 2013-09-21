@@ -4,7 +4,7 @@ var request = require('request');
 var handlebars = require('handlebars');
 var hbs = require('hbs');
 var sendgrid = require('sendgrid');
-var keys = require('./keys.js');
+var keys = require(__dirname + '/keys.js');
 
 var app = express();
 
