@@ -50,6 +50,8 @@ app.get('/selection', function(req, res){
 							accessToken: req.query.token,
 							pages: body.data
 						}, function(err, html){
+							console.log(err);
+							console.log('got here');
 							res.send(html);
 						});
 					}
