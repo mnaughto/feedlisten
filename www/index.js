@@ -7,6 +7,17 @@ var sendgrid = require('sendgrid');
 
 var app = express();
 
+hbs.registerHelper('foreach', function(context, options) {
+    var ret = "";
+    for(var prop in context)
+    {
+        ret = ret + options.fn({
+			property:prop, value:context[prop]
+        });
+    }
+    return ret;
+});
+
 app.configure('development', function() {
 	app.use(express.bodyParser());
 	app.use(express.errorHandler());
