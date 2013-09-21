@@ -12,7 +12,7 @@ app.configure('development', function() {
 	app.use(express.errorHandler());
 	app.locals.pretty = true;
 
-	app.set("view engine", 'hbs');
+	app.set("view engine", 'tmpl');
 	app.set("view options", { layout: false });
 
 	app.engine('tmpl', require('hbs').__express);
@@ -42,16 +42,16 @@ app.get('/selection', function(req, res){
 							accessToken: req.query.token,
 							pages: body.data
 						};
-						res.send(data);
+						//res.send(data);
 						//res.send('this is a thing.');
 
-						/*res.render(__dirname + '/views/pages.tmpl', {
+						res.render('pages', {
 							name: user_info.first_name,
 							accessToken: req.query.token,
 							pages: body.data
 						}, function(err, html){
 							res.send(html);
-						});*/
+						});
 					}
 				});
 			}
