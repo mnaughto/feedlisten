@@ -2,12 +2,11 @@
   "name": "feedlisten",
   "dependencies" : {
       "express" : "*",
-      "request"         : "*",
-      "handlebars"       : "*",
+      "request" : "*",
+      "handlebars" : "*",
       "hbs" : "*",
       "sendgrid" : "*",
       "underscore" : "*"
   }
 }
-
      
