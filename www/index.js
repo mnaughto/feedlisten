@@ -34,7 +34,18 @@ app.get('/selection', function(req, res){
 	if(req.query.token && req.query.fbid){
 		request({json: true, url:'https://graph.facebook.com/me', qs:{'access_token':req.query.token}}, function(error, response, body){
 			if(!error && response.statusCode == 200){
-				res.send('Hello there, ' + body.first_name);
+				var user_info = body;
+				request({json: true, url:'https://graph.facebook.com/me/accounts', qs:{'access_token':req.query.token}}, function(error, response, body){
+					if(!error && response.statusCode == 200){
+						res.render('pages', {
+							name: user_info.first_name,
+							accessToken: req.query.token,
+							pages: body.data
+						}, function(err, html){
+							res.send(html);
+						});
+					}
+				});
 			}
 		});
 	} else {
@@ -42,11 +53,11 @@ app.get('/selection', function(req, res){
 	}
 });
 
-app.get('/:groupid', function(req, res){
+app.get('/:pageid', function(req, res){
 
 });
 
-app.get('/:groupid/:postid', function(req, res){
+app.get('/:pageid/:postid', function(req, res){
 
 });
 
