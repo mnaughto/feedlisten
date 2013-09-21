@@ -130,6 +130,7 @@ app.get('/:pageid', function(req, res){
 								});
 							} else {
 								console.log(body);
+								console.log(bodyData);
 								res.send(500, 'Could not get a sentiment');
 							}
 						});
