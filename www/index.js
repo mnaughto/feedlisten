@@ -27,7 +27,19 @@ app.get('/', function(req, res){
 	} else {
 		//send them a facebook auth screen - this could be done on the client side, too
 	}
-	res.send('Hello');
+	res.send(__dirname + '/public/index.html');
+});
+
+app.get('/selection', function(req, res){
+	if(req.query.token && req.query.fbid){
+		request({json: true, url:'https://graph.facebook.com/me', qs:{'access_token':req.query.token}}, function(error, response, body){
+			if(!error && response.statusCode == 200){
+				res.send('Hello there, ' + body.first_name);
+			}
+		});
+	} else {
+		res.redirect(__dirname + '/public/index.html');
+	}
 });
 
 app.get('/:groupid', function(req, res){
