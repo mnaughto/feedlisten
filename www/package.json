@@ -1,0 +1,13 @@
+{
+  "name": "feedlisten",
+  "dependencies" : {
+      "express" : "*",
+      "request"         : "*",
+      "handlebars"       : "*",
+      "hbs" : "*",
+      "sendgrid" : "*",
+      "underscore" : "*"
+  }
+}
+
+     
