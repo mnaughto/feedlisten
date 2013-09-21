@@ -88,7 +88,7 @@ app.get('/:pageid', function(req, res){
 		request({json: true, url:'https://graph.facebook.com/' + req.params.pageid, qs:{'access_token':req.query.pageToken}}, function(error, response, body){
 			if(!error && response.statusCode == 200){
 				var page = body;
-				request({json: true, url:'https://graph.facebook.com/' + req.params.pageid + '?fields=feed', qs:{'access_token':req.query.pageToken}}, function(error, response, body){					
+				request({json: true, url:'https://graph.facebook.com/' + req.params.pageid, qs:{'fields':'feed', 'access_token':req.query.pageToken}}, function(error, response, body){
 					if(!error && response.statusCode == 200){
 						var item;
 						if(body.feed){
@@ -105,7 +105,7 @@ app.get('/:pageid', function(req, res){
 							};
 							var viewData = {
 								post: item,
-								sentiment: sentiment, 
+								sentiment: sentiment,
 								page: page,
 								name: 'Random User'
 							};
