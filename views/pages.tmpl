@@ -20,7 +20,10 @@
           if(response.status !== 'connected'){
             window.location = '/';
           }
-        })
+        });
+        $('.page_name a').each(function(index, element){
+          $(this).attr('href', $(this).attr('href') + {{accessToken}});
+        });
       };
 
       // Load the SDK asynchronously
@@ -38,7 +41,7 @@
     <div class="page_list">
       {{#foreach pages}}
         <div class="page_item">
-          <div class="page_name" id="{{value.id}}"><a href="/{{value.id}}?token={{{accessToken}}}">{{value.name}}</a></div>
+          <div class="page_name" id="{{value.id}}"><a href="/{{value.id}}?token=">{{value.name}}</a></div>
         </div>
       {{/foreach}}
     </div>
