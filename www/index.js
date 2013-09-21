@@ -109,24 +109,31 @@ app.get('/:pageid', function(req, res){
 						}
 						var bodyData = 'apikey=' + keys.ALCHEMY + '&text=' + encodeURIComponent(item.message) + '&outputMode=json';
 						request({method: 'post', url:'http://access.alchemyapi.com/calls/text/TextGetTextSentiment', body:bodyData}, function(error, response, body){
-							if(!error && response.statusCode == 200 && body.docSentiment){
-								var sentiment = {
-									type: body.docSentiment.type,
-									value: body.docSentiment.score
-								};
-								var viewData = {
-									post: item,
-									sentiment: sentiment,
-									page: page,
-									name: 'Random User'
-								};
-								res.render('page', viewData, function(err, html){
-									if(err){
-										console.log(err);
-									} else {
-										res.send(html);
-									}
-								});
+							if(!error && response.statusCode == 200){
+								body = JSON.parse(body);
+								if(body.docSentiment){
+									var sentiment = {
+										type: body.docSentiment.type,
+										value: body.docSentiment.score
+									};
+									var viewData = {
+										post: item,
+										sentiment: sentiment,
+										page: page,
+										name: 'Random User'
+									};
+									res.render('page', viewData, function(err, html){
+										if(err){
+											console.log(err);
+										} else {
+											res.send(html);
+										}
+									});
+								} else {
+									console.log(body);
+									console.log(bodyData);
+									res.send(500, 'Could not get a sentiment');	
+								}
 							} else {
 								console.log(body);
 								console.log(bodyData);
