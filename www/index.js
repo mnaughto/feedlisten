@@ -88,27 +88,36 @@ app.get('/:pageid', function(req, res){
 		request({json: true, url:'https://graph.facebook.com/' + req.params.pageid, qs:{'access_token':req.query.pageToken}}, function(error, response, body){
 			if(!error && response.statusCode == 200){
 				var page = body;
-				request({json: true, url:'https://graph.facebook.com/' + req.params.pageid + '?fields=feed', qs:{'access_token':req.query.pageToken}}, function(error, response, body){
-					var item = body.feed.data[0];
-					request({method: 'post', url:'http://access.alchemyapi.com/calls/text/TextGetTextSentiment', body:{apikey:keys.ALCHEMY, text:item.message, outputMode:'json'}}, function(error, response, body){
-						var sentiment = {
-							type: body.docSentiment.type,
-							value: body.docSentiment.score
-						};
-						var viewData = {
-							post: item,
-							sentiment: sentiment, 
-							page: page,
-							name: 'Random User'
-						};
-						res.render('page', viewData, function(err, html){
-							if(err){
-								console.log(err);
-							} else {
-								res.send(html);
-							}
+				request({json: true, url:'https://graph.facebook.com/' + req.params.pageid + '?fields=feed', qs:{'access_token':req.query.pageToken}}, function(error, response, body){					
+					if(!error && response.statusCode == 200){
+						var item;
+						if(body.feed){
+							item = body.feed.data[0];
+						} else {
+							res.send(500, 'The facebook thing failed.');
+							console.log(body);
+							return;
+						}
+						request({method: 'post', url:'http://access.alchemyapi.com/calls/text/TextGetTextSentiment', body:{apikey:keys.ALCHEMY, text:item.message, outputMode:'json'}}, function(error, response, body){
+							var sentiment = {
+								type: body.docSentiment.type,
+								value: body.docSentiment.score
+							};
+							var viewData = {
+								post: item,
+								sentiment: sentiment, 
+								page: page,
+								name: 'Random User'
+							};
+							res.render('page', viewData, function(err, html){
+								if(err){
+									console.log(err);
+								} else {
+									res.send(html);
+								}
+							});
 						});
-					});
+					}
 				});
 			}
 		});
