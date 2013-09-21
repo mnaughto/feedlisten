@@ -90,7 +90,7 @@ app.get('/:pageid', function(req, res){
 				var page = body;
 				request({json: true, url:'https://graph.facebook.com/' + req.params.pageid + '/feed', qs:{'access_token':req.query.pageToken}}, function(error, response, body){
 					var item = body.feed.data[0];
-					request.post({url:'http://access.alchemyapi.com/calls/text/TextGetTextSentiment', {body:{apikey:keys.ALCHEMY, text:item.message, outputMode:'json'}}}, function(error, response, body){
+					request({method: 'post', url:'http://access.alchemyapi.com/calls/text/TextGetTextSentiment', body:{apikey:keys.ALCHEMY, text:item.message, outputMode:'json'}}}, function(error, response, body){
 						var sentiment = {
 							type: body.docSentiment.type,
 							value: body.docSentiment.score
