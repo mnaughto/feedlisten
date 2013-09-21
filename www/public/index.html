@@ -27,6 +27,12 @@
          fjs.parentNode.insertBefore(js, fjs);
        }(document, 'script', 'facebook-jssdk'));
       $(document).ready(function(){
+        
+      });
+    </script>
+    <input type="button" id="login" value="Connect Facebook"/>
+    <script>
+      $('#login').click(function(){
         FB.getLoginStatus(function(response){
           if(response.status == 'connected'){
             window.location = '/selection?token=' + response.authResponse.accessToken + '&fbid=' + response.authResponse.userID;
@@ -44,6 +50,5 @@
         });
       });
     </script>
-
   </body> 
 </html>
