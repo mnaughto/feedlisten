@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var express = require('express');
-var request = require('require');
+var request = require('request');
 var handlebars = require('handlebars');
 var hbs = require('hbs');
 var sendgrid = require('sendgrid');
