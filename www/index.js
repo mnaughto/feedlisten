@@ -54,7 +54,7 @@ app.get('/selection', function(req, res){
 							accessToken: req.query.token,
 							pages: body.data
 						};
-
+						console.log(data);
 						res.render('pages', data, function(err, html){
 							if(err){
 								console.log(err);
