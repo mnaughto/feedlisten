@@ -33,14 +33,26 @@
        }(document, 'script', 'facebook-jssdk'));
     </script>
     <div class="greeting">
-      Hello there, {{name}}. Please select a page.
+      Hello there, {{name}}.
     </div>
-    <div class="page_list">
-      {{#foreach pages}}
-        <div class="page_item">
-          <div class="page_name" id="{{value.id}}"><a href="/{{value.id}}?token={{{accessToken}}}">{{value.name}}</a></div>
-        </div>
-      {{/foreach}}
+    <div class="page_item">
+      <div class="page_name" id="{{page.id}}">{{page.name}}</div>
+      <form id="email_submit" method="POST">
+        <select id="feedback_type">
+          <option value="" selected>Select Sentiment</option>
+          <option value="positive">Positive</option>
+          <option value="negative">Negative</option>
+          <option value="either">Both</option>
+        </select>
+        <input type="text" placeholder="Email"></input>
+        <input type="submit" value="Email me when sentiment is received"></input>
+      </form>
+    </div>
+    <div class="post_item" style="{{sentiment.type}}">
+      {{{post.message}}}
+      <div class="sentiment">
+        {{{sentiment.value}}}
+      </div>
     </div>
   </body> 
 </html>

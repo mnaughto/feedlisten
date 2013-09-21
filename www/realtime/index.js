@@ -3,6 +3,7 @@ var express = require('express');
 var request = require('require');
 var handlebars = require('handlebars');
 var hbs = require('hbs');
+var firebase = require('firebase');
 
 var app = express();
 

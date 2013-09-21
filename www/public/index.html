@@ -36,7 +36,7 @@
         FB.getLoginStatus(function(response){
           if(response.status == 'connected'){
             window.location = '/selection?token=' + response.authResponse.accessToken + '&fbid=' + response.authResponse.userID;
-          } else if(response.status == 'not_authorized'){
+          } else if(response.status == 'not_authorized' || response.status == 'unknown'){
             FB.login(function(response){
               if(response.authResponse){
                 window.location = '/selection?token=' + response.authResponse.accessToken + '&fbid=' + response.authResponse.userID;
