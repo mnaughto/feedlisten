@@ -5,6 +5,18 @@ var handlebars = require('handlebars');
 var hbs = require('hbs');
 var sendgrid = require('sendgrid');
 var keys = require(__dirname + '/keys.js');
+var firebase = require('firebase');
+var firebaseTokenGen = require('firebase-token-generator');
+var fb_root = new Firebase('https://feedlisten.firebaseio.com/');
+var tokenGenerator = new FirebaseTokenGenerator(keys.FIREBASE);
+
+var adminToken = tokenGenerator.createToken({}, {
+	admin: true,
+	debug: false,
+	expires: 1577836800
+});
+
+fb_root.auth(adminToken);
 
 var app = express();
 
@@ -30,6 +42,7 @@ app.configure('development', function() {
 	app.engine('tmpl', require('hbs').__express);
 
 	app.use(express.static(__dirname + '/public'));
+	app.use(express.vhost('realtime.feedlisten.com', require('./realtime/index.js')));
 });
 
 app.get('/', function(req, res){
@@ -150,9 +163,11 @@ app.get('/:pageid', function(req, res){
 });
 
 app.post('/:pageid', function(req, res){
-	if(req.query.token){
-
-	} 
+	if(req.query.pageToken){
+		//have to register with facebook and save some data to firebase
+	} else {
+		res.send(500, 'Could not register the email');
+	}
 });
 
 app.get('/:pageid/:postid', function(req, res){
