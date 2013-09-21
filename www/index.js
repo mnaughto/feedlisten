@@ -94,11 +94,22 @@ app.get('/:pageid', function(req, res){
 						if(body.feed){
 							item = body.feed.data[0];
 						} else {
-							res.send(500, 'The facebook thing failed.');
-							console.log(body);
+							var viewData = {
+								page:page,
+								name:'Random User'
+							};
+							res.render('page', viewData, function(err, html){
+								if(err){
+									console.log(err);
+								} else {
+									res.send(html);
+								}
+							});
 							return;
 						}
-						request({method: 'post', url:'http://access.alchemyapi.com/calls/text/TextGetTextSentiment', body:{apikey:keys.ALCHEMY, text:item.message, outputMode:'json'}}, function(error, response, body){
+						var bodyData = 'apikey=' + keys.ALCHEMY + '&text=' + item.message;
+						bodyData = encodeURIComponent(bodyData);
+						request({method: 'post', url:'http://access.alchemyapi.com/calls/text/TextGetTextSentiment', body:bodyData, outputMode:'json'}, function(error, response, body){
 							var sentiment = {
 								type: body.docSentiment.type,
 								value: body.docSentiment.score

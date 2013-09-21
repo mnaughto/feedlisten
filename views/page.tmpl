@@ -48,11 +48,17 @@
         <input type="submit" value="Email me when sentiment is received"></input>
       </form>
     </div>
-    <div class="post_item" style="{{sentiment.type}}">
-      {{{post.message}}}
-      <div class="sentiment">
-        {{{sentiment.value}}}
+    {{#if post}}
+      <div class="post_item" style="{{sentiment.type}}">
+        {{{post.message}}}
+        <div class="sentiment">
+          {{{sentiment.value}}}
+        </div>
       </div>
-    </div>
+    {{else}}
+      <div class="post_item">
+        No posts were found.
+      </div>
+    {{/if}}
   </body> 
 </html>
