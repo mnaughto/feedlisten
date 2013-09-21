@@ -107,8 +107,7 @@ app.get('/:pageid', function(req, res){
 							});
 							return;
 						}
-						var bodyData = 'apikey=' + keys.ALCHEMY + '&text=' + item.message;
-						bodyData = encodeURIComponent(bodyData);
+						var bodyData = 'apikey=' + keys.ALCHEMY + '&text=' + encodeURIComponent(item.message);
 						request({method: 'post', url:'http://access.alchemyapi.com/calls/text/TextGetTextSentiment', body:bodyData, outputMode:'json'}, function(error, response, body){
 							if(!error && response.statusCode == 200 && body.docSentiment){
 								var sentiment = {
