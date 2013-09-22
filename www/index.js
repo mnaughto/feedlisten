@@ -9,6 +9,7 @@ var firebase = require('firebase');
 var firebaseTokenGen = require('firebase-token-generator');
 var fb_root = new Firebase('https://feedlisten.firebaseio.com/');
 var tokenGenerator = new FirebaseTokenGenerator(keys.FIREBASE);
+var APP_ID = '384422024994164';
 
 var adminToken = tokenGenerator.createToken({}, {
 	admin: true,
@@ -165,6 +166,27 @@ app.get('/:pageid', function(req, res){
 app.post('/:pageid', function(req, res){
 	if(req.query.pageToken){
 		//have to register with facebook and save some data to firebase
+		var bodyData = 'object=page&fields=feed&verify_token=flashing7&callback_url=' + encodeURIComponent('http://realtime.feedlisten.com/');
+		request({json: true, url: 'https://graph.facebook.com/' + APP_ID + '/subscriptions', method: 'post', body:bodyData}, function(error, response, body){
+			if(!error && response.statusCode == 200){
+				fb_root.child(req.params.pageid).set({
+					token: req.query.pageToken,
+					email: req.body.email,
+					type: req.body.type
+				}, function(fbError){
+					if(fbError){
+						console.log(fbError);
+					} else {
+						res.send('The email was registered successfully! There\'s no way to unregister :-P');
+					}
+				});
+
+			} else {
+				console.log(error);
+				console.log(bodyData);
+				res.send(500, 'We had a problem.');
+			}
+		});
 	} else {
 		res.send(500, 'Could not register the email');
 	}
