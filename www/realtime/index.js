@@ -3,7 +3,7 @@ var express = require('express');
 var request = require('request');
 var hbs = require('hbs');
 var keys = require(__dirname + '/index.js');
-var sendgrid = require('sendgrid')('mnaughto', keys.SENDGRID);
+var sendgrid = require('sendgrid')('mnaughto', 'Green26');
 var Firebase = require('firebase');
 var FirebaseTokenGenerator = require('firebase-token-generator');
 var fb_root = new Firebase('https://feedlisten.firebaseio.com/');
@@ -71,6 +71,12 @@ app.post('/callback', function(req, res){
 											if((entryData.type == 'either') || (entryData.type == sentiment.type)){
 												//send an email
 												console.log('send an email');
+												sendgrid.send({
+													to: entryData.email,
+													subject: 'Feedback report',
+													text: 'Your page has received' + (entryData.type == 'either') ? 'important': entryData.type + 'feedback',
+													from: 'noreply@feedlisten.com',
+													replyto: 'michael.d.naughton@gmail.com'});
 												console.log(entryData);
 											}
 										} else {
