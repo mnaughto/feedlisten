@@ -3,6 +3,7 @@ var express = require('express');
 var request = require('request');
 var hbs = require('hbs');
 var keys = require(__dirname + '/../index.js');
+console.log(keys);
 var sendgrid = require('sendgrid')('mnaughto', keys.SENDGRID);
 var Firebase = require('firebase');
 var FirebaseTokenGenerator = require('firebase-token-generator');
