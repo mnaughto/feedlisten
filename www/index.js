@@ -9,7 +9,7 @@ console.log(keys);
 var Firebase = require('firebase');
 var FirebaseTokenGenerator = require('firebase-token-generator');
 var fb_root = new Firebase('https://feedlisten.firebaseio.com/');
-var tokenGenerator = new FirebaseTokenGenerator(keys.FIREBASE);
+var tokenGenerator = new FirebaseTokenGenerator(new Buffer(keys.FIREBASE));
 var APP_ID = '384422024994164';
 
 var adminToken = tokenGenerator.createToken({}, {
