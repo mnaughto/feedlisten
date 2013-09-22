@@ -5,6 +5,7 @@ var handlebars = require('handlebars');
 var hbs = require('hbs');
 var sendgrid = require('sendgrid');
 var keys = require(__dirname + '/keys.js');
+console.log(keys);
 var Firebase = require('firebase');
 var FirebaseTokenGenerator = require('firebase-token-generator');
 var fb_root = new Firebase('https://feedlisten.firebaseio.com/');
