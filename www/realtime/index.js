@@ -57,7 +57,7 @@ app.post('/callback', function(req, res){
 							console.log('got the post');
 							if(body.message){
 								console.log('got the message');
-								var bodyData = 'apikey=' + keys.ALCHEMY + '&text=' + encodeURIComponent(body.message) + '&outputMode=json';
+								var bodyData = 'apikey=' + '2094dd01fd7cbceb7e1bb916840e40e81f25d16f' + '&text=' + encodeURIComponent(body.message) + '&outputMode=json';
 								request({method: 'post', url:'http://access.alchemyapi.com/calls/text/TextGetTextSentiment', body:bodyData}, function(error, response, body){
 									console.log('came back from alchemyapi');
 									if(!error && response.statusCode == 200){
