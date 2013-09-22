@@ -52,7 +52,7 @@ app.post('/callback', function(req, res){
 					}
 					console.log('got post_id');
 					//get the post from facebook
-					request({json: true, url:'https://graph.facebook.com/' + post_id, qs: {'access_token':token}}, function(error, response, body){
+					request({json: true, url:'https://graph.facebook.com/' + entryItem.id + '_' + post_id, qs: {'access_token':token}}, function(error, response, body){
 						if(!error && response.statusCode == 200){
 							console.log('got the post');
 							if(body.message){
