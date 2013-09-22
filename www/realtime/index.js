@@ -76,7 +76,7 @@ app.post('/callback', function(req, res){
 												sendgrid.send({
 													to: entryData.email,
 													subject: 'Feedback report',
-													text: 'Your page has received' + ((entryData.type == 'either') ? 'important': entryData.type + 'feedback'),
+													text: 'Your page has received ' + ((entryData.type == 'either') ? 'important': entryData.type + ' feedback'),
 													from: 'noreply@feedlisten.com',
 													replyto: 'michael.d.naughton@gmail.com'});
 												console.log(entryData);
