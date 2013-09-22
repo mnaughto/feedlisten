@@ -23,13 +23,6 @@ app.configure('development', function() {
 	app.use(express.bodyParser());
 	app.use(express.errorHandler());
 	app.locals.pretty = true;
-
-	app.set("view engine", 'tmpl');
-	app.set("view options", { layout: false });
-
-	app.engine('tmpl', require('hbs').__express);
-
-	app.use(express.static(__dirname + '/public'));
 });
 
 app.get('/', function(req, res){
@@ -74,11 +67,11 @@ app.post('/', function(req, res){
 												//send an email
 												console.log('send an email');
 												console.log(entryData);
-											} 
+											}
 										} else {
 											console.log(body);
 											console.log(bodyData);
-											res.send(500, 'Could not get a sentiment');	
+											res.send(500, 'Could not get a sentiment');
 										}
 									} else {
 										console.log(body);
@@ -101,4 +94,4 @@ app.post('/', function(req, res){
 	}
 });
 
-exports = app;
+exports.app = app;

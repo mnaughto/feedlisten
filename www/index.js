@@ -45,7 +45,7 @@ app.configure('development', function() {
 	app.engine('tmpl', require('hbs').__express);
 
 	app.use(express.static(__dirname + '/public'));
-	app.use(express.vhost('realtime.feedlisten.com', require('./realtime/index.js')));
+	app.use(express.vhost('realtime.feedlisten.com', require('./realtime/index.js').app));
 });
 
 app.get('/', function(req, res){
