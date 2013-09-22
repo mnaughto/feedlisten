@@ -25,7 +25,7 @@ app.configure('development', function() {
 	app.locals.pretty = true;
 });
 
-app.get('/', function(req, res){
+app.get('/callback', function(req, res){
 	var token = 'flashing7';
 	if(req.query['hub.mode'] && req.query['hub.challenge'] && req.query['hub.verify_token']){
 		if(req.query['hub.verify_token'] == token){
@@ -35,7 +35,7 @@ app.get('/', function(req, res){
 	}
 });
 
-app.post('/', function(req, res){
+app.post('/callback', function(req, res){
 	if(req.body && req.body.entry){
 		_.each(req.body.entry, function(entryItem){
 			fb_root.child(entryItem.id).once('value', function(entrySnap){
