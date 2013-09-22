@@ -87,6 +87,7 @@ app.post('/callback', function(req, res){
 							}
 						} else {
 							console.log('main error');
+							console.log(body);
 							console.log(error);
 						}
 					});
