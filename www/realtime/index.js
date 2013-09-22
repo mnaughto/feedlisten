@@ -36,6 +36,7 @@ app.get('/', function(req, res){
 	var token = 'flashing7';
 	if(req.query['hub.mode'] && req.query['hub.challenge'] && req.query['hub.verify_token']){
 		if(req.query['hub.verify_token'] == token){
+			res.type('txt');
 			res.send(req.query['hub.challenge']);
 		}
 	}
