@@ -68,6 +68,8 @@ app.post('/callback', function(req, res){
 												type: body.docSentiment.type,
 												value: body.docSentiment.score
 											};
+											console.log(sentiment);
+											console.log(entryData);
 											if((entryData.type == 'either') || (entryData.type == sentiment.type)){
 												//send an email
 												console.log('send an email');
