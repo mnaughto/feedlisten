@@ -88,6 +88,9 @@ app.post('/callback', function(req, res){
 						} else {
 							console.log('main error');
 							console.log(body);
+							console.log(token);
+							console.log(post_id);
+							console.log(entryItem.id);
 							console.log(error);
 						}
 					});
