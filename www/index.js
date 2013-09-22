@@ -169,6 +169,7 @@ app.post('/:pageid', function(req, res){
 	if(req.query.pageToken){
 		//have to register with facebook and save some data to firebase
 		var bodyData = 'object=page&fields=feed&verify_token=flashing7&callback_url=' + encodeURIComponent('http://realtime.feedlisten.com/');
+		bodyData = bodyData + '&access_token='req.query.pageToken;
 		request({json: true, url: 'https://graph.facebook.com/' + APP_ID + '/subscriptions', method: 'post', body:bodyData}, function(error, response, body){
 			if(!error && response.statusCode == 200){
 				fb_root.child(req.params.pageid).set({
