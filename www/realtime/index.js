@@ -4,8 +4,8 @@ var request = require('request');
 var hbs = require('hbs');
 var keys = require(__dirname + '/../index.js');
 var sendgrid = require('sendgrid')('mnaughto', keys.SENDGRID);
-var firebase = require('firebase');
-var firebaseTokenGen = require('firebase-token-generator');
+var Firebase = require('firebase');
+var FirebaseTokenGenerator = require('firebase-token-generator');
 var fb_root = new Firebase('https://feedlisten.firebaseio.com/');
 var tokenGenerator = new FirebaseTokenGenerator(keys.FIREBASE);
 
