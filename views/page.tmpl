@@ -2,6 +2,17 @@
   <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <style>
+      .negative {
+        background-color: red;
+        color: black;
+      }
+
+      .positive {
+        background-color: green;
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <div id="fb-root"></div>
@@ -49,7 +60,7 @@
       </form>
     </div>
     {{#if post}}
-      <div class="post_item" style="{{sentiment.type}}">
+      <div class="post_item" class="{{sentiment.type}}">
         {{{post.message}}}
         <div class="sentiment">
           {{{sentiment.value}}}
