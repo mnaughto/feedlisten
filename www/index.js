@@ -186,6 +186,7 @@ app.post('/:pageid', function(req, res){
 			} else {
 				console.log(error);
 				console.log(bodyData);
+				console.log(response);
 				res.send(500, 'We had a problem.');
 			}
 		});
